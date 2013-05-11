@@ -1,0 +1,21 @@
+doctype 5
+html(lang="en")
+    head
+        title MsgMe!
+        link(rel="stylesheet", href="css/bootstrap.css")
+    body
+        .container(style="padding-top:20px")
+            .hero-unit
+                h1(style="margin-bottom:20px") Send me a message!
+                if(error)
+                    .alert.alert-error= error
+                form(action="/", method="post", class="form-inline")
+                    fieldset
+                        .input-append
+                            input(
+                                name="message",
+                                type="text",
+                                placeholder="Your message to me.",
+                                class="input-xxlarge"
+                            )
+                            button(type="submit", class="btn btn-primary") Send
