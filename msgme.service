@@ -1,0 +1,8 @@
+[Service]
+ExecStart=/usr/local/bin/node /usr/local/bin/msgme
+StandardOutput=syslog
+SyslogIdentifier=msgme
+Environment=PATH=/usr/local/bin/node:/usr/local/bin
+Environment=NODE_ENV=production
+Environment=PORT=systemd
+Environment=DISPLAY=:0

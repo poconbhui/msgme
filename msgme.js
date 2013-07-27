@@ -3,15 +3,18 @@
 /*
  * Define general parameters
  */
-var PORT = 2787;
+var PORT = process.env.PORT || 27087;
 
 
 /*
  * Import modules
  */
-var express   = require("express");
-var app       = express();
-var libnotify = require("libnotify");
+var http     = require("http");
+var express  = require("express");
+var app      = express();
+var notify   = require("c-libnotify").notify;
+var systemd  = require("systemd");
+var autoquit = require("autoquit");
 
 
 /*
@@ -40,16 +43,8 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
     var message = req.body.message;
 
-    if(message.match(/^[\w.,'!\- ]+$/)) {
-        /* Shoot off message */
-        libnotify.notify(message, {title:"Node-notify", time: 5});
-    } else {
-        /* Set error message */
-        res.cookie(
-            'error',
-            "Message must contain only alphanumeric characters and [.,!-' ]"
-        );
-    }
+    /* Shoot off message */
+    notify(message, {title:"Node-notify"});
 
     res.redirect('/');
 });
@@ -58,5 +53,8 @@ app.post('/', function(req, res){
 /*
  * Boot express server
  */
-app.listen(PORT);
+var server = http.createServer(app);
+server.autoQuit({timeOut:10*60}); // Timeout after 10 minutes
+server.listen(PORT);
+
 console.log("Node-notify is running on port "+PORT);

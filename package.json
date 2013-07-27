@@ -1,22 +1,25 @@
 {
   "name": "msgme",
-  "version": "0.0.1",
-
+  "version": "0.0.2",
+  "description": "Receive desktop notifications from a browser interface.",
+  "keywords": [
+    "notifications",
+    "libnotify"
+  ],
+  "author": "Pádraig Ó Conbhuí",
+  "license": "BSD",
   "scripts": {
-    "start": "node msgme.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-
+  "main": "bin/msgme",
+  "bin": {
+    "msgme": "./bin/msgme"
+  },
   "dependencies": {
-    "express"       : "3.2.4",
-    "jade"          : "0.30.0",
-    "libnotify"     : "1.0.3"
-  },
-
-  "devDependencies": {
-  },
-
-  "engines": {
-    "node": "0.8.x",
-    "npm" : "1.1.x"
+    "c-libnotify": "git://github.com/poconbhui/node-c-libnotify#0.0.1",
+    "jade": "~0.30.0",
+    "express": "~3.2.4",
+    "autoquit": "~0.1.4",
+    "systemd": "~0.2.2"
   }
 }
